@@ -55,6 +55,10 @@ dataset size:140 MB
 
 The dataset is unbalanced with a disproportionately low number for disgust.  In future work if you needed to boost for a more balanced dataset you could try some data augmentation in the disgust category.  For now since we are looking for a positive or negative score we will leave the number of images as is.
 
+### EDA
+
+EDA was done as quick visual browsing through randome .jpg for quality of images.
+
 ### Techniques used:
 
 I decided to use the OpenCV library to help with facial detection.  Since faces have many features to detect, OpenCV utilizes cascades which will break the face detection into multiple tests and quickly scan the image for test one and if it passes it will go on to the next test, if it fails it will no longer test for faces.  Since face detection is a common project OpenCV has many other built-in detections such as eyes and hands.
