@@ -1,0 +1,21 @@
+pandas
+matplotlib
+numpy
+seaborn
+matplotlib.pyplot
+
+sklearn.metrics import confusion_matrix
+sklearn.metrics import ConfusionMatrixDisplay
+
+tensorflow.keras.preprocessing.image import ImageDataGenerator
+tensorflow.keras.layers import Dense, Input, Dropout,Flatten, Conv2D
+tensorflow.keras.layers import BatchNormalization, Activation, MaxPooling2D
+tensorflow.keras.models import Model, Sequential
+tensorflow.keras.optimizers import Adam
+keras.regularizers import l2
+
+streamlit
+cv2
+tensorflow
+
+note: tensorflow version 2.6.0
