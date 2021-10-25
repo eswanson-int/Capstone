@@ -14,14 +14,11 @@ st.write("This is a streamlit App where it looks at live webcam feed and"
 # Load the cascade for face detection and models
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-
-# access the facial expression class where the image is classified
-#model = ExpressionModel("model.json", "model_weights.h5")
 global emotions
 emotions = ["Angry", "Disgust", "Fear", "Happy",
             "Neutral", "Sad", "Surprise"]
 
-# load model from JSON file
+# load model from JSON file or from tf.keras
 global loaded_model
 
 @st.cache(allow_output_mutation=True)
@@ -33,8 +30,6 @@ def load_data():
     #    loaded_model.load_weights('model-2-w.h5')
     return loaded_model
 
-
-#model = tf.keras.models.load_model('model-f')
 model = load_data()
 
 def predict_emotion(img):
@@ -48,18 +43,16 @@ def predict_emotion(img):
 #define text font
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+#define variables for saving emotions
 global pred2
 global happy
 global sad
-#test = 0
 happy = 0
 sad = 0
 
 #create the dataFrame to store information
 d = {'Sad Time' : [0], 'Happy Time': [0]}
 df = pd.DataFrame(data = d)
-#df.set_index('sad', inplace=True)
-
 
 run = st.checkbox('Run')
 window = st.image([])
@@ -112,15 +105,13 @@ while run:
             df['Happy Time'] = happy
 
             df['results'] = np.where(df['Happy Time'] > df['Sad Time'],
-                                     "Looks like you really enjoyed that", "That wasn't fun, try something else")
+                                     "Good job! Looks like you really enjoyed that", "That wasn't fun, try to be more positive")
 
             df.to_csv('temp.csv', index=False)
 
         write_temp(sad, happy)
 
     # Display
-    #This method opens an outside window.  cv2 can't be used in streamlit
-    #cv2.imshow('img', img)
 
     #To use inside streamlit - need to change coloring back to RGB
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -136,7 +127,6 @@ if k==27:
 clicked = st.button("View results")
 if clicked:
     df = pd.read_csv('temp.csv')
-    #df.set_index('happy', inplace=True)
     st.table(df)
 
 
